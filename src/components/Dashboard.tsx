@@ -13,13 +13,6 @@ interface DashboardProps {
 const Dashboard: React.FC<DashboardProps> = ({ onSelectModule }) => {
     const { user, progress } = useUser();
 
-    const calculateOverallProgress = () => {
-        const totalActivities = MODULES.reduce((acc, module) => acc + module.activities.length, 0);
-        if (totalActivities === 0) return 0;
-        const completedActivities = Object.values(progress).flatMap(Object.values).filter((p: any) => p.completed).length;
-        return Math.round((completedActivities / totalActivities) * 100);
-    };
-
     const getModuleProgress = (moduleId: string) => {
         const module = MODULES.find(m => m.id === moduleId);
         if (!module) return 0;
